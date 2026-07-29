@@ -1,0 +1,114 @@
+{
+  "name": "chatbot",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋\nMy name is Fouzan. How can I assist you today?",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -304,
+        -32
+      ],
+      "id": "304340d3-bb4a-42cf-bf5a-622f188cbc40",
+      "name": "When chat message received",
+      "webhookId": "a9378f66-885f-4cb1-8798-425ab39fdf69"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        16,
+        -160
+      ],
+      "id": "0957b89a-28f2-4241-9f59-2d6259fb07f7",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        -64,
+        64
+      ],
+      "id": "4708f033-9c45-4ac6-b363-25bed6e8b0c6",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "eFOVcC8JZmXzF9uO",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        112,
+        80
+      ],
+      "id": "cce5a2ae-3b28-482b-a4bd-bab63a59645e",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "a4368a11-aab3-4b26-b1fc-c95ef8e87d0e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "33dba694c677d2c3cbc1927d8c611f11f6696cb0fa45af88c4d73e5202417dc3"
+  },
+  "nodeGroups": [],
+  "id": "Zg3nP5vR6zoodZIz",
+  "tags": []
+}
